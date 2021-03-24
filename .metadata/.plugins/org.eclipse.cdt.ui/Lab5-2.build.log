@@ -1,0 +1,44 @@
+15:47:09 **** Incremental Build of configuration Debug for project Lab5-2 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:118:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+   sprintf(text, "%d\n\r", AD_RES);
+   ^~~~~~~
+../Core/Src/main.c:118:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:118:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:119:47: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   HAL_UART_Transmit(&huart2, (uint32_t) text, strlen(text), HAL_MAX_DELAY);
+                                               ^~~~~~
+../Core/Src/main.c:119:47: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:119:47: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:119:30: warning: passing argument 2 of 'HAL_UART_Transmit' makes pointer from integer without a cast [-Wint-conversion]
+   HAL_UART_Transmit(&huart2, (uint32_t) text, strlen(text), HAL_MAX_DELAY);
+                              ^
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:404:0,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:696:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'long unsigned int'
+ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:29: warning: variable 'DC_Multiplier' set but not used [-Wunused-but-set-variable]
+  uint16_t AD_RES = 0, Vamb, DC_Multiplier;
+                             ^~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Lab5-2.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Embedded\Lab\Lab5-2\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab5-2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Lab5-2.elf
+ 
+arm-none-eabi-objdump -h -S  Lab5-2.elf  > "Lab5-2.list"
+arm-none-eabi-objcopy  -O binary  Lab5-2.elf  "Lab5-2.bin"
+arm-none-eabi-size   Lab5-2.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16376	    120	   1784	  18280	   4768	Lab5-2.elf
+Finished building: default.size.stdout
+Finished building: Lab5-2.bin
+ 
+Finished building: Lab5-2.list
+ 
+ 
+
+15:47:11 Build Finished. 0 errors, 6 warnings. (took 2s.266ms)
+
